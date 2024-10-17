@@ -1,0 +1,54 @@
+{
+    "name": "PlayerSelection",
+    "maps": [
+        {
+            "name": "SelectionAction",
+            "id": "5653d062-a15b-4998-a3ee-3e0a6ecb408d",
+            "actions": [
+                {
+                    "name": "SelectionControls",
+                    "type": "Button",
+                    "id": "8b864eb7-fbeb-40c1-9e01-967282e60fe5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "PointerPosition",
+                    "type": "Value",
+                    "id": "cfdd621d-a109-46fd-841e-0ca9c283eac5",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "628d0602-da17-4ae7-aea4-4deee1d8c5ac",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "SelectionControls",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6a016573-d2ab-457c-98d0-907342294b54",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PointerPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
