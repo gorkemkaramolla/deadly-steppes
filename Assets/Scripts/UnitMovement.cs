@@ -2,15 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.InputSystem;  // Import the new Input System namespace
+using UnityEngine.InputSystem;
 
 public class UnitMovement : MonoBehaviour
 {
     Camera cam;
     NavMeshAgent agent;
     public LayerMask groundLayer;
-
-    // Declare an InputAction for the mouse click
     private InputAction clickAction;
 
     void Start()
@@ -18,9 +16,8 @@ public class UnitMovement : MonoBehaviour
         cam = Camera.main;
         agent = GetComponent<NavMeshAgent>();
 
-        // Initialize the InputAction
         clickAction = new InputAction(binding: "<Mouse>/RightButton");
-        clickAction.Enable();  // Enable the action
+        clickAction.Enable();
     }
 
     void Update()
@@ -41,5 +38,6 @@ public class UnitMovement : MonoBehaviour
     void OnDestroy()
     {
         clickAction.Disable();
+
     }
 }
