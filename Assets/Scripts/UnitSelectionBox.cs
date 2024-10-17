@@ -78,6 +78,9 @@ public class UnitSelectionBox : MonoBehaviour
         // Update the end position while dragging (mouse button is still pressed)
         if (playerInputActions.SelectionAction.SelectionControls.ReadValue<float>() > 0) // If the mouse button is pressed
         {
+            UnitSelectionManager.Instance.DeselectUnits(); // Deselect all units
+            SelectUnits();
+
             endPosition = playerInputActions.SelectionAction.PointerPosition.ReadValue<Vector2>();
 
             // If mouse has moved significantly, start dragging

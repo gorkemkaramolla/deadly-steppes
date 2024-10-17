@@ -44,6 +44,24 @@ public partial class @PlayerSelection: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""SelectShift"",
+                    ""type"": ""Button"",
+                    ""id"": ""f310a73f-6ca0-40b1-8b10-76bcc5e08013"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ControlA"",
+                    ""type"": ""Button"",
+                    ""id"": ""2599d3a2-907c-4f62-8d48-399899b43de4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -68,6 +86,83 @@ public partial class @PlayerSelection: IInputActionCollection2, IDisposable
                     ""action"": ""PointerPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b1c052ef-4ff7-4c4e-ae61-cb89e77d57be"",
+                    ""path"": ""<Keyboard>/shift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""SelectShift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""cmdA"",
+                    ""id"": ""20fdd699-f8fc-40e0-bf70-0daa23e48d4f"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ControlA"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""b9923576-c54b-4b5f-ba88-6ea588ac4a50"",
+                    ""path"": ""<Keyboard>/leftMeta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ControlA"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""ca7a8bed-b642-4c67-8bba-7adf6b0a3e7f"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ControlA"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""controlA"",
+                    ""id"": ""e14e3d9e-adf0-456b-b247-bf059c8e1660"",
+                    ""path"": ""OneModifier"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ControlA"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""modifier"",
+                    ""id"": ""dbf8646b-d88a-4274-9f01-7e8d72e6457a"",
+                    ""path"": ""<Keyboard>/ctrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ControlA"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""binding"",
+                    ""id"": ""3513f233-a9b0-4c20-b7a2-b462190a6e4d"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ControlA"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -78,6 +173,8 @@ public partial class @PlayerSelection: IInputActionCollection2, IDisposable
         m_SelectionAction = asset.FindActionMap("SelectionAction", throwIfNotFound: true);
         m_SelectionAction_SelectionControls = m_SelectionAction.FindAction("SelectionControls", throwIfNotFound: true);
         m_SelectionAction_PointerPosition = m_SelectionAction.FindAction("PointerPosition", throwIfNotFound: true);
+        m_SelectionAction_SelectShift = m_SelectionAction.FindAction("SelectShift", throwIfNotFound: true);
+        m_SelectionAction_ControlA = m_SelectionAction.FindAction("ControlA", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -141,12 +238,16 @@ public partial class @PlayerSelection: IInputActionCollection2, IDisposable
     private List<ISelectionActionActions> m_SelectionActionActionsCallbackInterfaces = new List<ISelectionActionActions>();
     private readonly InputAction m_SelectionAction_SelectionControls;
     private readonly InputAction m_SelectionAction_PointerPosition;
+    private readonly InputAction m_SelectionAction_SelectShift;
+    private readonly InputAction m_SelectionAction_ControlA;
     public struct SelectionActionActions
     {
         private @PlayerSelection m_Wrapper;
         public SelectionActionActions(@PlayerSelection wrapper) { m_Wrapper = wrapper; }
         public InputAction @SelectionControls => m_Wrapper.m_SelectionAction_SelectionControls;
         public InputAction @PointerPosition => m_Wrapper.m_SelectionAction_PointerPosition;
+        public InputAction @SelectShift => m_Wrapper.m_SelectionAction_SelectShift;
+        public InputAction @ControlA => m_Wrapper.m_SelectionAction_ControlA;
         public InputActionMap Get() { return m_Wrapper.m_SelectionAction; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -162,6 +263,12 @@ public partial class @PlayerSelection: IInputActionCollection2, IDisposable
             @PointerPosition.started += instance.OnPointerPosition;
             @PointerPosition.performed += instance.OnPointerPosition;
             @PointerPosition.canceled += instance.OnPointerPosition;
+            @SelectShift.started += instance.OnSelectShift;
+            @SelectShift.performed += instance.OnSelectShift;
+            @SelectShift.canceled += instance.OnSelectShift;
+            @ControlA.started += instance.OnControlA;
+            @ControlA.performed += instance.OnControlA;
+            @ControlA.canceled += instance.OnControlA;
         }
 
         private void UnregisterCallbacks(ISelectionActionActions instance)
@@ -172,6 +279,12 @@ public partial class @PlayerSelection: IInputActionCollection2, IDisposable
             @PointerPosition.started -= instance.OnPointerPosition;
             @PointerPosition.performed -= instance.OnPointerPosition;
             @PointerPosition.canceled -= instance.OnPointerPosition;
+            @SelectShift.started -= instance.OnSelectShift;
+            @SelectShift.performed -= instance.OnSelectShift;
+            @SelectShift.canceled -= instance.OnSelectShift;
+            @ControlA.started -= instance.OnControlA;
+            @ControlA.performed -= instance.OnControlA;
+            @ControlA.canceled -= instance.OnControlA;
         }
 
         public void RemoveCallbacks(ISelectionActionActions instance)
@@ -193,5 +306,7 @@ public partial class @PlayerSelection: IInputActionCollection2, IDisposable
     {
         void OnSelectionControls(InputAction.CallbackContext context);
         void OnPointerPosition(InputAction.CallbackContext context);
+        void OnSelectShift(InputAction.CallbackContext context);
+        void OnControlA(InputAction.CallbackContext context);
     }
 }
